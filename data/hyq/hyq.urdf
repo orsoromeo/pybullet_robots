@@ -5,12 +5,12 @@
       <lateral_friction value="1"/>
   </contact>
     <inertial>
-      <origin rpy="0 0 0" xyz="0 0.03 0.043794"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
        <mass value="13.715"/>
        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
     </inertial>
     <visual>
-      <origin rpy="4.71 1.57 0" xyz="0 0 0.043794"/>
+      <origin rpy="4.71 1.57 0" xyz="0 0.132 0"/>
       <geometry>
 
 				<mesh filename="trunk/trunk.dae" scale="1 1 1"/>
@@ -20,7 +20,7 @@
       </material>
     </visual>
     <collision>
-      <origin rpy="-1.57 0 0" xyz="0 0 0"/>
+      <origin rpy="4.71 1.57 0" xyz="0 0.132 0"/>
       <geometry>
 
 				<mesh filename="trunk/trunk.dae" scale="1 1 1"/>
@@ -83,7 +83,7 @@
     </visual>
 
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="1.57 0.79 4.71" xyz="0 0 0"/>
       <geometry>
 				<mesh filename="leg/upperleg.dae" scale="1 1 1"/>
       </geometry>
@@ -118,7 +118,7 @@
     </visual>
 
     <collision>
-      <origin rpy="0 1.57079 0" xyz="0 0.0 0"/>
+      <origin rpy="1.57 -0.39 -1.57" xyz="0 0 0"/>
       <geometry>
 				<mesh filename="leg/lowerleg.dae" scale="1 1 1"/>
       </geometry>
@@ -157,7 +157,7 @@
     </visual>
 
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 3.14" xyz="0 0 0"/>
       <geometry>
 				<mesh filename="leg/hipassembly.dae" scale="1 1 1"/>
       </geometry>
@@ -195,7 +195,7 @@
     </visual>
 
      <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="1.57 0.79 4.71" xyz="0 0 0"/>
       <geometry>
 				<mesh filename="leg/upperleg.dae" scale="1 1 1"/>
       </geometry>
@@ -234,7 +234,7 @@
     </visual>
 
      <collision>
-      <origin rpy="0 1.57079 0" xyz="0 0 0"/>
+      <origin rpy="1.57 -0.39 -1.57" xyz="0 0 0"/>
       <geometry>
 				<mesh filename="leg/lowerleg.dae" scale="1 1 1"/>
       </geometry>
@@ -275,7 +275,7 @@
     </visual>
 
      <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="3.14 0 0" xyz="0 0 0"/>
       <geometry>
 				<mesh filename="leg/hipassembly.dae" scale="1 1 1"/>
       </geometry>
@@ -310,7 +310,7 @@
     </visual>
 
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-1.57 5.5 4.71" xyz="0 0 0"/>
       <geometry>
 				<mesh filename="leg/upperleg.dae" scale="1 1 1"/>
       </geometry>
@@ -337,7 +337,7 @@
        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
     </inertial>
        <visual>
-      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <origin rpy="1.57 0.39 -1.57" xyz="0 0 0"/>
       <geometry>
 				<mesh filename="leg/lowerleg.dae" scale="1 1 1"/>
       </geometry>
@@ -345,7 +345,7 @@
     </visual>
 
      <collision>
-      <origin rpy="0 1.57079 0" xyz="0 0 0"/>
+      <origin rpy="1.57 0.39 -1.57" xyz="0 0 0"/>
       <geometry>
 				<mesh filename="leg/lowerleg.dae" scale="1 1 1"/>
       </geometry>
@@ -381,7 +381,7 @@
     </visual>
 
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="3.14 0 3.14" xyz="0 0 0"/>
       <geometry>
 				<mesh filename="leg/hipassembly.dae" scale="1 1 1"/>
       </geometry>
@@ -417,7 +417,7 @@
     </visual>
 
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="1.57 5.5 4.71" xyz="0 0 0"/>
       <geometry>
 				<mesh filename="leg/upperleg.dae" scale="1 1 1"/>
       </geometry>
@@ -446,7 +446,7 @@
        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
     </inertial>
    <visual>
-      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <origin rpy="1.57 0.39 -1.57" xyz="0 0 0"/>
       <geometry>
 				<mesh filename="leg/lowerleg.dae" scale="1 1 1"/>
       </geometry>
@@ -454,7 +454,7 @@
     </visual>
 
     <collision>
-      <origin rpy="0 1.57079 0" xyz="0 0 0"/>
+      <origin rpy="1.57 0.39 -1.57" xyz="0 0 0"/>
       <geometry>
 				<mesh filename="leg/lowerleg.dae" scale="1 1 1"/>
       </geometry>
