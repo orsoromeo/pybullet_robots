@@ -111,7 +111,22 @@ while (1):
         p.setJointMotorControl2(quadruped, jointIds[i], p.POSITION_CONTROL,
                                 jointDirections[i] * targetPos + jointOffsets[i], force=maxForce)
 
-
+    body_xyz, orient = p.getBasePositionAndOrientation(quadruped)
+    FR = p.getJointInfo(quadruped, 3)
+    FR_xyz = FR[14]
+    FL = p.getJointInfo(quadruped, 7)
+    FL_xyz = FL[14]
+    RR = p.getJointInfo(quadruped, 11)
+    RR_xyz = RR[14]
+    RL = p.getJointInfo(quadruped, 15)
+    RL_xyz = RL[14]
+    body_x = (FR_xyz[0] + FL_xyz[0] + RR_xyz[0] + RL_xyz[0])/4 - body_xyz[0]
+    body_y = (FR_xyz[1] + FL_xyz[1] + RR_xyz[1] + RL_xyz[1])/4 - body_xyz[1]
+    if body_x != 0:
+        body_xyz[0] + (math.fabs(body_x) / body_x) * 0.1
+    if body_y != 0:
+        body_xyz[1] + (math.fabs(body_y) / body_y) * 0.1
+    p.resetBasePositionAndOrientation(quadruped, [body_xyz[0], body_xyz[1], body_xyz[2]], orient)
 
     if (useRealTimeSimulation):
         dt = datetime.now()
