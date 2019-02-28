@@ -60,7 +60,7 @@
 		<axis xyz="0 0 -1"/>
 		<parent link="chassis"/>
 		<child link="FR_hip_motor"/>
-		<origin rpy="0 0 0" xyz="-0.15 0 0.242889"/>
+		<origin rpy="0 0 0" xyz="-0.15 0 0.15"/>
 		<limit effort="100" velocity="100"/>
 		<joint_properties damping=".0" friction=".0"/>
 	</joint>
@@ -189,7 +189,7 @@
 		<axis xyz="0 0 1"/>
 		<parent link="chassis"/>
 		<child link="FL_hip_motor"/>
-		<origin rpy="0 0 0" xyz="0.15 0 0.242889"/>
+		<origin rpy="0 0 0" xyz="0.15 0 0.15"/>
 		<limit effort="100" velocity="100"/>
 		<joint_properties damping=".0" friction=".0"/>
 	</joint>
@@ -419,7 +419,7 @@
         <parent link="RR_lower_leg"/>
         <child link="RR_EndEffector_point"/>
 
-        <origin rpy="0 0 0" xyz="0 -0.3 0.11"/>
+        <origin rpy="0 0 0" xyz="0 -0.3 -0.11"/>
         <limit effort="100" velocity="100"/>
         <joint_properties damping=".0" friction =".0"/>
     </joint>
@@ -549,7 +549,7 @@
         <parent link="RL_lower_leg"/>
         <child link="RL_EndEffector_point"/>
 
-        <origin rpy="0 0 0" xyz="0 -0.3 0.11"/>
+        <origin rpy="0 0 0" xyz="0 -0.3 -0.11"/>
         <limit effort="100" velocity="100"/>
         <joint_properties damping=".0" friction =".0"/>
     </joint>
