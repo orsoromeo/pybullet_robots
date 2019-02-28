@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<robot name="plane">
+<robot name="hyq">
   <link name="chassis">
   <contact>
       <lateral_friction value="1"/>
@@ -10,7 +10,7 @@
        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
     </inertial>
     <visual>
-      <origin rpy="4.71 1.57 0" xyz="0 0.132 0"/>
+      <origin rpy="4.71 1.57 0" xyz="0 0 0"/>
       <geometry>
 
 				<mesh filename="trunk/trunk.dae" scale="1 1 1"/>
@@ -19,13 +19,13 @@
         <color rgba="0.95 0.75 0.05 1"/>
       </material>
     </visual>
-    <collision>
-      <origin rpy="4.71 1.57 0" xyz="0 0.132 0"/>
-      <geometry>
+    <!-- <collision>
+     <origin rpy="4.71 1.57 0" xyz="0 0 0"/>
+     <geometry>
 
-				<mesh filename="trunk/trunk.dae" scale="1 1 1"/>
-      </geometry>
-    </collision>
+			<mesh filename="trunk/trunk.dae" scale="1 1 1"/>
+     </geometry>
+   </collision> -->
   </link>
 
 
@@ -136,6 +136,26 @@
 		<joint_properties damping=".0" friction=".0"/>
 	</joint>
 
+    <link name="FR_EndEffector_point">
+  <contact>
+      <lateral_friction value="1"/>
+  </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 -0.16 -0.02"/>
+       <mass value="0.241"/>
+       <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    </link>
+
+    <joint name="FR_EndEffector" type="continuous">
+        <axis xyz="1 0 0"/>
+        <parent link="FR_lower_leg"/>
+        <child link="FR_EndEffector_point"/>
+
+        <origin rpy="0 0 0" xyz="0 -0.3 0.11"/>
+        <limit effort="100" velocity="100"/>
+        <joint_properties damping=".0" friction =".0"/>
+    </joint>
 
 	 <link name="FL_hip_motor">
   <contact>
@@ -251,6 +271,27 @@
 		<joint_properties damping=".0" friction=".0"/>
 	</joint>
 
+    <link name="FL_EndEffector_point">
+  <contact>
+      <lateral_friction value="1"/>
+  </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 -0.16 -0.02"/>
+       <mass value="0.241"/>
+       <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    </link>
+
+    <joint name="FL_EndEffector" type="continuous">
+        <axis xyz="1 0 0"/>
+        <parent link="FL_lower_leg"/>
+        <child link="FL_EndEffector_point"/>
+
+        <origin rpy="0 0 0" xyz="0 -0.3 0.11"/>
+        <limit effort="100" velocity="100"/>
+        <joint_properties damping=".0" friction =".0"/>
+    </joint>
+
 
 
 
@@ -362,6 +403,27 @@
 		<joint_properties damping=".0" friction=".0"/>
 	</joint>
 
+    <link name="RR_EndEffector_point">
+  <contact>
+      <lateral_friction value="1"/>
+  </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 -0.16 -0.02"/>
+       <mass value="0.241"/>
+       <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    </link>
+
+    <joint name="RR_EndEffector" type="continuous">
+        <axis xyz="1 0 0"/>
+        <parent link="RR_lower_leg"/>
+        <child link="RR_EndEffector_point"/>
+
+        <origin rpy="0 0 0" xyz="0 -0.3 0.11"/>
+        <limit effort="100" velocity="100"/>
+        <joint_properties damping=".0" friction =".0"/>
+    </joint>
+
 
 	 <link name="RL_hip_motor">
   <contact>
@@ -470,6 +532,27 @@
 		<limit effort="100" velocity="100"/>
 		<joint_properties damping=".0" friction=".0"/>
 	</joint>
+
+    <link name="RL_EndEffector_point">
+  <contact>
+      <lateral_friction value="1"/>
+  </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 -0.16 -0.02"/>
+       <mass value="0.241"/>
+       <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    </link>
+
+    <joint name="RL_EndEffector" type="continuous">
+        <axis xyz="1 0 0"/>
+        <parent link="RL_lower_leg"/>
+        <child link="RL_EndEffector_point"/>
+
+        <origin rpy="0 0 0" xyz="0 -0.3 0.11"/>
+        <limit effort="100" velocity="100"/>
+        <joint_properties damping=".0" friction =".0"/>
+    </joint>
 
 
 
