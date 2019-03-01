@@ -112,21 +112,22 @@ while (1):
                                 jointDirections[i] * targetPos + jointOffsets[i], force=maxForce)
 
     body_xyz, orient = p.getBasePositionAndOrientation(quadruped)
-    FR = p.getJointInfo(quadruped, 3)
-    FR_xyz = FR[14]
-    FL = p.getJointInfo(quadruped, 7)
-    FL_xyz = FL[14]
-    RR = p.getJointInfo(quadruped, 11)
-    RR_xyz = RR[14]
-    RL = p.getJointInfo(quadruped, 15)
-    RL_xyz = RL[14]
-    body_x = (FR_xyz[0] + FL_xyz[0] + RR_xyz[0] + RL_xyz[0])/4 - body_xyz[0]
-    body_y = (FR_xyz[1] + FL_xyz[1] + RR_xyz[1] + RL_xyz[1])/4 - body_xyz[1]
-    if body_x != 0:
-        body_xyz[0] + (math.fabs(body_x) / body_x) * 0.1
-    if body_y != 0:
-        body_xyz[1] + (math.fabs(body_y) / body_y) * 0.1
-    p.resetBasePositionAndOrientation(quadruped, [body_xyz[0], body_xyz[1], body_xyz[2]], orient)
+    #FR = p.getJointInfo(quadruped, 3)
+    #FR_xyz = FR[14]
+    #FL = p.getJointInfo(quadruped, 7)
+    #FL_xyz = FL[14]
+    #RR = p.getJointInfo(quadruped, 11)
+    #RR_xyz = RR[14]
+    #RL = p.getJointInfo(quadruped, 15)
+    #RL_xyz = RL[14]
+    #body_x = (FR_xyz[0] + FL_xyz[0] + RR_xyz[0] + RL_xyz[0])/4 - body_xyz[0]
+    #body_y = (FR_xyz[1] + FL_xyz[1] + RR_xyz[1] + RL_xyz[1])/4 - body_xyz[1]
+    #if body_x != 0:
+    #    body_xyz[0] + (math.fabs(body_x) / body_x) * 0.1
+    #if body_y != 0:
+    #    body_xyz[1] + (math.fabs(body_y) / body_y) * 0.1
+
+    #p.resetBasePositionAndOrientation(quadruped, [body_xyz[0], body_xyz[1], body_xyz[2]], orient)
 
     if (useRealTimeSimulation):
         dt = datetime.now()
@@ -135,12 +136,9 @@ while (1):
         t += 0.01
         time.sleep(0.01)
 
-
     for i in range(4):
-        if orient[2] >= 0.2:
-            pos = [body_xyz[0] + cyrcle_center[i] + 0.1 * math.cos(t), body_xyz[1] + cyrcle_center[i+4] + 0.1 * math.sin(t), - 0.5]
-        else:
-            pos = [body_xyz[0] - cyrcle_center[i] + 0.1 * math.cos(t), body_xyz[1] - cyrcle_center[i+4] + 0.1 * math.sin(t), - 0.5]
+        pos = [body_xyz[0] + cyrcle_center[i] + 0.1 * math.cos(5*t), body_xyz[1] + cyrcle_center[i+4] + 0.1 * math.sin(5*t), - 0.45]
+        #pos = [body_xyz[0] + cyrcle_center[i], body_xyz[1] + cyrcle_center[i+4], - 0.45]
         jointPoses = p.calculateInverseKinematics(quadruped, sawyerEndEffectorIndex[i], pos, jointDamping=jd)
 
         # reset the joint state (ignoring all dynamics, not recommended to use during simulation)
@@ -149,6 +147,8 @@ while (1):
             qIndex = jointInfo[3]
             if qIndex > -1:
                 p.resetJointState(quadruped, i, jointPoses[qIndex - 7])
+
+    p.resetBasePositionAndOrientation(quadruped, [0.1 * math.cos(t), 0.1 * math.sin(t), body_xyz[2]], orient)
 
 #        ls = p.getLinkState(quadruped, sawyerEndEffectorIndex[i])
 #        if (hasPrevPose):
