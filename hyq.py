@@ -7,6 +7,12 @@ import time
 
 p.connect(p.GUI)
 plane = p.loadURDF("plane.urdf", [0, 0, -0.5])
+obstacle1 = p.loadURDF("boston_box.urdf", [0, 2, 0])
+obstacle2 = p.loadURDF("marble_cube.urdf", [0, 3, 0])
+obstacle3 = p.loadURDF("boston_box.urdf", [0, 4, 0])
+obstacle4 = p.loadURDF("marble_cube.urdf", [0, 5, 0])
+obstacle5 = p.loadURDF("marble_cube.urdf", [0, 4, 1])
+obstacle6 = p.loadURDF("r2d2.urdf", [0, 2, 1])
 p.setGravity(0, 0, -9.8)
 simulationFreq = 1. / 500
 p.setTimeStep(simulationFreq)
