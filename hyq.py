@@ -1,4 +1,5 @@
 import pybullet as p
+import numpy as np
 import math
 from ikpy.chain import Chain
 from datetime import datetime
@@ -7,7 +8,8 @@ import time
 p.connect(p.GUI)
 plane = p.loadURDF("plane.urdf", [0, 0, -0.5])
 p.setGravity(0, 0, -9.8)
-p.setTimeStep(1. / 500)
+simulationFreq = 1. / 500
+p.setTimeStep(simulationFreq)
 # p.setDefaultContactERP(0)
 # urdfFlags = p.URDF_USE_SELF_COLLISION+p.URDF_USE_SELF_COLLISION_EXCLUDE_ALL_PARENTS
 urdfFlags = p.URDF_USE_SELF_COLLISION
@@ -101,6 +103,11 @@ prevPose=[0,0,0]
 prevPose1=[0,0,0]
 hasPrevPose = 0
 trailDuration = 15
+costant = [0, 1.8, 1.8, 0]
+old_base_pos, old_base_orient = p.getBasePositionAndOrientation(quadruped)
+lin_vel=[0,0,0]
+ang_vel=[0,0,0]
+body_xyz, orient = p.getBasePositionAndOrientation(quadruped)
 
 while (1):
 
@@ -111,23 +118,21 @@ while (1):
         p.setJointMotorControl2(quadruped, jointIds[i], p.POSITION_CONTROL,
                                 jointDirections[i] * targetPos + jointOffsets[i], force=maxForce)
 
-    body_xyz, orient = p.getBasePositionAndOrientation(quadruped)
-    #FR = p.getJointInfo(quadruped, 3)
-    #FR_xyz = FR[14]
-    #FL = p.getJointInfo(quadruped, 7)
-    #FL_xyz = FL[14]
-    #RR = p.getJointInfo(quadruped, 11)
-    #RR_xyz = RR[14]
-    #RL = p.getJointInfo(quadruped, 15)
-    #RL_xyz = RL[14]
-    #body_x = (FR_xyz[0] + FL_xyz[0] + RR_xyz[0] + RL_xyz[0])/4 - body_xyz[0]
-    #body_y = (FR_xyz[1] + FL_xyz[1] + RR_xyz[1] + RL_xyz[1])/4 - body_xyz[1]
-    #if body_x != 0:
-    #    body_xyz[0] + (math.fabs(body_x) / body_x) * 0.1
-    #if body_y != 0:
-    #    body_xyz[1] + (math.fabs(body_y) / body_y) * 0.1
-
-    #p.resetBasePositionAndOrientation(quadruped, [body_xyz[0], body_xyz[1], body_xyz[2]], orient)
+    FR = p.getJointInfo(quadruped, 3)
+    FR_xyz = FR[14]
+    FL = p.getJointInfo(quadruped, 7)
+    FL_xyz = FL[14]
+    RR = p.getJointInfo(quadruped, 11)
+    RR_xyz = RR[14]
+    RL = p.getJointInfo(quadruped, 15)
+    RL_xyz = RL[14]
+    body_x = (FR_xyz[0] + FL_xyz[0] + RR_xyz[0] + RL_xyz[0])/4 - body_xyz[0]
+    body_y = (FR_xyz[1] + FL_xyz[1] + RR_xyz[1] + RL_xyz[1])/4 - body_xyz[1]
+    if body_x != 0:
+        body_xyz[0] + (math.fabs(body_x) / body_x) * 0.1
+    if body_y != 0:
+        body_xyz[1] + (math.fabs(body_y) / body_y) * 0.1
+    p.resetBasePositionAndOrientation(quadruped, [old_base_pos[0], old_base_pos[1] + 5*simulationFreq, 0], orient)
 
     if (useRealTimeSimulation):
         dt = datetime.now()
@@ -137,8 +142,7 @@ while (1):
         time.sleep(0.01)
 
     for i in range(4):
-        pos = [body_xyz[0] + cyrcle_center[i] + 0.1 * math.cos(5*t), body_xyz[1] + cyrcle_center[i+4] + 0.1 * math.sin(5*t), - 0.45]
-        #pos = [body_xyz[0] + cyrcle_center[i], body_xyz[1] + cyrcle_center[i+4], - 0.45]
+        pos = [body_xyz[0] + cyrcle_center[i], body_xyz[1] + cyrcle_center[i+4] + 0.15 * math.sin(8.5*(t + costant[i])), 0.1 * math.cos(8.5*(t + costant[i])) + body_xyz[2] - 0.4]
         jointPoses = p.calculateInverseKinematics(quadruped, sawyerEndEffectorIndex[i], pos, jointDamping=jd)
 
         # reset the joint state (ignoring all dynamics, not recommended to use during simulation)
@@ -148,12 +152,8 @@ while (1):
             if qIndex > -1:
                 p.resetJointState(quadruped, i, jointPoses[qIndex - 7])
 
-    p.resetBasePositionAndOrientation(quadruped, [0.1 * math.cos(t), 0.1 * math.sin(t), body_xyz[2]], orient)
 
-#        ls = p.getLinkState(quadruped, sawyerEndEffectorIndex[i])
-#        if (hasPrevPose):
-#            p.addUserDebugLine(prevPose, pos, [0, 0, 0.3], 1, trailDuration)
-#            p.addUserDebugLine(prevPose1, ls[4], [1, 0, 0], 1, trailDuration)
-#        prevPose = pos
-#        prevPose1 = ls[4]
-#        hasPrevPose = 1
+    body_xyz, orient = p.getBasePositionAndOrientation(quadruped)
+    lin_vel = np.subtract(body_xyz, old_base_pos)*simulationFreq
+    old_base_pos = body_xyz
+    old_base_orient = orient
